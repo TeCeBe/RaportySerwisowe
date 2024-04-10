@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "104633657007",
+    "project_id": "raporty-serwisowe",
+    "storage_bucket": "raporty-serwisowe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:104633657007:android:5bcb2beb1a95c1481dd65a",
+        "android_client_info": {
+          "package_name": "com.ctrlaltelite.raportyserwisowe"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhjiG1Rzt738cyfTTaRfphJ1uD4pqLFH4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
