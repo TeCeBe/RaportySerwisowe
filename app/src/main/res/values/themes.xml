@@ -6,4 +6,11 @@
     </style>
 
     <style name="Theme.RaportySerwisowe" parent="Base.Theme.RaportySerwisowe" />
+    <style name="Theme.RaportySerwisowe.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="Theme.RaportySerwisowe.AppBarOverlay"
+        parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.RaportySerwisowe.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
