@@ -13,6 +13,9 @@
         android:theme="@style/Theme.RaportySerwisowe"
         tools:targetApi="31">
         <activity
+            android:name=".AddReport"
+            android:exported="false" />
+        <activity
             android:name=".MainView"
             android:exported="false" />
         <activity
