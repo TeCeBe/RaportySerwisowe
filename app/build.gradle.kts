@@ -40,7 +40,15 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("com.google.firebase:firebase-database:21.0.0")
     implementation("com.google.firebase:firebase-auth:23.0.0")
+    implementation("com.google.firebase:firebase-firestore:25.0.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    testImplementation("androidx.test.ext:junit:1.1.3")
+    testImplementation("androidx.test:core:1.4.0")
+    testImplementation("org.robolectric:robolectric:4.7.3")
+    testImplementation("org.mockito:mockito-core:3.9.0")
+    testImplementation("org.mockito:mockito-inline:3.9.0")
+
+
 }
