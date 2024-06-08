@@ -7,58 +7,59 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.TextView;
 
+import java.util.List;
 
-public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.ReportViewHolder> {
+public class ReportsAdapter extends BaseAdapter {
+    private Context context;
     private List<Report> reports;
 
-    public ReportsAdapter(List<Report> reports) {
+    public ReportsAdapter(Context context, List<Report> reports) {
+        this.context = context;
         this.reports = reports;
     }
 
-    @NonNull
     @Override
-    public ReportViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_reports_list, parent, false);
-        return new ReportViewHolder(view);
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull ReportViewHolder holder, int position) {
-        Report report = reports.get(position);
-        holder.title.setText(report.getTitle());
-        holder.content.setText(report.getContent());
-        holder.date.setText(report.getDate());
-        holder.time.setText(report.getTime());
-        holder.place.setText(report.getPlace());
-        holder.userId.setText(report.getUserId());
-
-
-    }
-
-    @Override
-    public int getItemCount() {
+    public int getCount() {
         return reports.size();
     }
 
-    static class ReportViewHolder extends RecyclerView.ViewHolder {
-        TextView title;
-        TextView content;
-        TextView date;
-        TextView time;
-        TextView place;
-        TextView userId;
+    @Override
+    public Object getItem(int position) {
+        return reports.get(position);
+    }
 
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
 
-        public ReportViewHolder(@NonNull View itemView) {
-            super(itemView);
-            title = itemView.findViewById(R.id.reportTitle);
-            content = itemView.findViewById(R.id.reportContent);
-            date = itemView.findViewById(R.id.editTextDate);
-            time = itemView.findViewById(R.id.editTextTime);
-            place = itemView.findViewById(R.id.reportPlace);
-
-
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        if (convertView == null) {
+            convertView = LayoutInflater.from(context).inflate(R.layout.activity_report_details, parent, false);
         }
+
+        Report report = reports.get(position);
+
+        TextView titleTextView = convertView.findViewById(R.id.reportTitleTextView);
+        TextView contentTextView = convertView.findViewById(R.id.reportContentTextView);
+        TextView dateTextView = convertView.findViewById(R.id.reportDateTextView);
+        TextView timeTextView = convertView.findViewById(R.id.reportTimeTextView);
+        TextView placeTextView = convertView.findViewById(R.id.reportPlaceTextView);
+
+        titleTextView.setText(report.getTitle());
+        contentTextView.setText(report.getContent());
+        dateTextView.setText(report.getDate());
+        timeTextView.setText(report.getTime());
+        placeTextView.setText(report.getPlace());
+
+        return convertView;
     }
 }

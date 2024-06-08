@@ -1,36 +1,42 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
 
     <TextView
-        android:id="@+id/reportTitle"
+        android:id="@+id/reportTitleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Title"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:text="Report Title"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/reportContent"
+        android:id="@+id/reportContentTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Content"
-        app:layout_constraintTop_toBottomOf="@id/reportTitle"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:text="Report Content"
+        android:textSize="14sp" />
 
-    <TextView android:layout_height="wrap_content"
+    <TextView
+        android:id="@+id/reportDateTextView"
         android:layout_width="wrap_content"
-        android:text="Data"
-        app:layout_constraintTop_toBottomOf="@id/reportContent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:id="@+id/reportDate"/>
-    <TextView android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:text="Status"
-        app:layout_constraintTop_toBottomOf="@id/reportDate"
-        app:layout_constraintStart_toStartOf="parent"
-        android:id="@+id/reportStatus"/>
+        android:layout_height="wrap_content"
+        android:text="Report Date"
+        android:textSize="14sp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/reportTimeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Report Time"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/reportPlaceTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Report Place"
+        android:textSize="14sp" />
+</LinearLayout>

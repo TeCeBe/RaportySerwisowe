@@ -47,7 +47,7 @@ public class ReportsListActivity extends AppCompatActivity {
                                 reports.add(report);
                             }
 
-                            adapter = new ReportsAdapter(reports);
+                            adapter = new ReportsAdapter(this, reports);
                             recyclerView.setAdapter(adapter);
                         } else {
 
