@@ -7,10 +7,13 @@ import android.view.View;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -26,11 +29,13 @@ public class MainView extends AppCompatActivity {
     private RecyclerView reportsRecyclerView;
     private ReportsAdapter reportsAdapter;
     private List<Report> reports = new ArrayList<>();
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_view);
+        db = FirebaseFirestore.getInstance();
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
@@ -104,19 +109,23 @@ public class MainView extends AppCompatActivity {
     }
 
     private void loadReportsFromFirestore() {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("reports")
                 .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        reports.clear();
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-                            Report report = document.toObject(Report.class);
-                            reports.add(report);
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            List<Report> reports = new ArrayList<>();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Report report = document.toObject(Report.class);
+                                report.setId(document.getId()); // Set the document id
+                                reports.add(report);
+                            }
+                            reportsAdapter = new ReportsAdapter(MainView.this, reports);
+                            reportsRecyclerView.setAdapter(reportsAdapter);
+                        } else {
+                            // Handle errors here
                         }
-                        reportsAdapter.notifyDataSetChanged();
-                    } else {
-                        // Handle errors here
                     }
                 });
     }

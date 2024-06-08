@@ -1,6 +1,7 @@
 package com.ctrlaltelite.raportyserwisowe;
 
 public class Report {
+    private String id;
     private String title;
     private String content;
     private String date;
@@ -9,9 +10,11 @@ public class Report {
     private String userId;
 
 
-    public Report() {}
+    public Report() {
+    }
 
     public Report(String title, String content, String date, String time, String place, String userId) {
+        this.id = id;
         this.title = title;
         this.content = content;
         this.date = date;
@@ -31,6 +34,7 @@ public class Report {
     public String getContent() {
         return content;
     }
+
     public String getTime() {
         return time;
     }
@@ -41,6 +45,14 @@ public class Report {
 
     public String getUserId() {
         return userId;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
 

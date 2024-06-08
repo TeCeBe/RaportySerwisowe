@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.content.Intent;
 
@@ -12,14 +13,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.google.firebase.Firebase;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.List;
 public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.ReportViewHolder> {
     private Context context;
     private List<Report> reports;
+    private FirebaseFirestore db ;
 
     public ReportsAdapter(Context context, List<Report> reports) {
         this.context = context;
         this.reports = reports;
+        this.db = FirebaseFirestore.getInstance();
     }
 
     @NonNull
@@ -69,14 +75,18 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.ReportVi
         TextView dateTextView;
         TextView timeTextView;
         TextView placeTextView;
+        Button deleteButton;
 
         public ReportViewHolder(@NonNull View itemView) {
             super(itemView);
+            deleteButton = itemView.findViewById(R.id.deleteButton);
             titleTextView = itemView.findViewById(R.id.reportTitleTextView);
             contentTextView = itemView.findViewById(R.id.reportContentTextView);
             dateTextView = itemView.findViewById(R.id.reportDateTextView);
             timeTextView = itemView.findViewById(R.id.reportTimeTextView);
             placeTextView = itemView.findViewById(R.id.reportPlaceTextView);
         }
+
     }
+
 }

@@ -11,7 +11,11 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/reportsRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical" />
         <ListView
             android:id="@+id/reportsListView"
             android:layout_width="match_parent"
@@ -59,10 +63,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/ic_input_add"
         tools:ignore="SpeakableTextPresentCheck" />
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/reportsRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="vertical" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
