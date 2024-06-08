@@ -2,7 +2,9 @@ package com.ctrlaltelite.raportyserwisowe;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,7 +28,7 @@ public class MainView extends AppCompatActivity {
             TextView uidTextView = findViewById(R.id.nameTextView);
             TextView emailTextView = findViewById(R.id.emailTextView);
 
-            FloatingActionButton addReportButton = (FloatingActionButton) findViewById(R.id.addReportButton);
+            FloatingActionButton addReportButton = findViewById(R.id.addReportButton);
 
             uidTextView.setText(uid);
             emailTextView.setText(email);
@@ -40,8 +42,45 @@ public class MainView extends AppCompatActivity {
             });
         }
 
+        View optionsButton = findViewById(R.id.optionsButton);
+        optionsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu popup = new PopupMenu(MainView.this, v);
+                popup.getMenuInflater().inflate(R.menu.options_menu, popup.getMenu());
 
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        return onOptionsItemSelected(item);
+                    }
+                });
+
+                popup.show();
+            }
+        });
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.logout) {
+            handleLogout();
+            return true;
+        } else if (id == R.id.editProfile) {
+            handleEditProfile();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
+    private void handleLogout() {
+        FirebaseAuth.getInstance().signOut();
+        startActivity(new Intent(MainView.this, Login.class));
+        finish();
+    }
+
+    private void handleEditProfile() {
+        startActivity(new Intent(MainView.this, EditProfile.class));
+    }
 }
