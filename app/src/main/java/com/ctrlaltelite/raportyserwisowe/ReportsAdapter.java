@@ -1,22 +1,19 @@
 package com.ctrlaltelite.raportyserwisowe;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-import java.util.List;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.content.Intent;
+
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 
 import java.util.List;
-
-public class ReportsAdapter extends BaseAdapter {
+public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.ReportViewHolder> {
     private Context context;
     private List<Report> reports;
 
@@ -25,41 +22,61 @@ public class ReportsAdapter extends BaseAdapter {
         this.reports = reports;
     }
 
+    @NonNull
     @Override
-    public int getCount() {
+    public ReportViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.activity_report_details, parent, false);
+        return new ReportViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ReportViewHolder holder, int position) {
+        Report report = reports.get(position);
+        holder.titleTextView.setText(report.getTitle());
+        holder.contentTextView.setText(report.getContent());
+        holder.dateTextView.setText(report.getDate());
+        holder.timeTextView.setText(report.getTime());
+        holder.placeTextView.setText(report.getPlace());
+
+        // Add a click listener for the report item
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Create an intent to start the ReportDetailsActivity
+                Intent intent = new Intent(context, ReportDetailsActivity.class);
+
+                // Pass the report details to the ReportDetailsActivity
+                intent.putExtra("title", report.getTitle());
+                intent.putExtra("content", report.getContent());
+                intent.putExtra("date", report.getDate());
+                intent.putExtra("time", report.getTime());
+                intent.putExtra("place", report.getPlace());
+
+                // Start the ReportDetailsActivity
+                context.startActivity(intent);
+            }
+        });
+    }
+
+    @Override
+    public int getItemCount() {
         return reports.size();
     }
 
-    @Override
-    public Object getItem(int position) {
-        return reports.get(position);
-    }
+    public static class ReportViewHolder extends RecyclerView.ViewHolder {
+        TextView titleTextView;
+        TextView contentTextView;
+        TextView dateTextView;
+        TextView timeTextView;
+        TextView placeTextView;
 
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.activity_report_details, parent, false);
+        public ReportViewHolder(@NonNull View itemView) {
+            super(itemView);
+            titleTextView = itemView.findViewById(R.id.reportTitleTextView);
+            contentTextView = itemView.findViewById(R.id.reportContentTextView);
+            dateTextView = itemView.findViewById(R.id.reportDateTextView);
+            timeTextView = itemView.findViewById(R.id.reportTimeTextView);
+            placeTextView = itemView.findViewById(R.id.reportPlaceTextView);
         }
-
-        Report report = reports.get(position);
-
-        TextView titleTextView = convertView.findViewById(R.id.reportTitleTextView);
-        TextView contentTextView = convertView.findViewById(R.id.reportContentTextView);
-        TextView dateTextView = convertView.findViewById(R.id.reportDateTextView);
-        TextView timeTextView = convertView.findViewById(R.id.reportTimeTextView);
-        TextView placeTextView = convertView.findViewById(R.id.reportPlaceTextView);
-
-        titleTextView.setText(report.getTitle());
-        contentTextView.setText(report.getContent());
-        dateTextView.setText(report.getDate());
-        timeTextView.setText(report.getTime());
-        placeTextView.setText(report.getPlace());
-
-        return convertView;
     }
 }

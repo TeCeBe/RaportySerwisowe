@@ -30,7 +30,7 @@ public class ReportsListActivity extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance();
 
-        // pobieram dane reports z  Firestore
+        // Load reports from Firestore
         loadReportsFromFirestore();
     }
 
@@ -47,10 +47,11 @@ public class ReportsListActivity extends AppCompatActivity {
                                 reports.add(report);
                             }
 
-                            adapter = new ReportsAdapter(this, reports);
+                            // Pass the activity context instead of `this`
+                            adapter = new ReportsAdapter(ReportsListActivity.this, reports);
                             recyclerView.setAdapter(adapter);
                         } else {
-
+                            // Handle errors here
                         }
                     }
                 });
