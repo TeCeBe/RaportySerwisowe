@@ -2,7 +2,9 @@ package com.ctrlaltelite.raportyserwisowe;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +25,7 @@ public class MainView extends AppCompatActivity {
             String uid = user.getUid();
             String email = user.getEmail();
 
+
             TextView uidTextView = findViewById(R.id.nameTextView);
             TextView emailTextView = findViewById(R.id.emailTextView);
 
@@ -31,6 +34,7 @@ public class MainView extends AppCompatActivity {
             uidTextView.setText(uid);
             emailTextView.setText(email);
 
+
             addReportButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -38,10 +42,44 @@ public class MainView extends AppCompatActivity {
                     startActivity(intent);
                 }
             });
+            // Find the options button and set an OnClickListener
+            View optionsButton = findViewById(R.id.optionsButton);
+            optionsButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Create a new PopupMenu and inflate it with the options menu
+                    PopupMenu popup = new PopupMenu(MainView.this, v);
+                    popup.getMenuInflater().inflate(R.menu.options_menu, popup.getMenu());
+
+                    // Set an OnMenuItemClickListener to handle menu item clicks
+                    popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem item) {
+                            final int logoutId = 1;
+                            final int editProfileId = 2;
+
+                            switch (item.getItemId()) {
+                                case logoutId:
+                                    // Handle logout
+                                    FirebaseAuth.getInstance().signOut();
+                                    startActivity(new Intent(MainView.this, Login.class));
+                                    finish();
+                                    return true;
+                                case editProfileId:
+                                    startActivity(new Intent(MainView.this, EditProfile.class));
+                                    return true;
+                                default:
+                                    return false;
+                            }
+                        }
+                    });
+
+                    // Show the PopupMenu
+                    popup.show();
+                }
+            });
         }
 
 
     }
-
-
 }
