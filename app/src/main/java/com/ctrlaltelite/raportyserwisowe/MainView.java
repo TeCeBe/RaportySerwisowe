@@ -65,7 +65,8 @@ public class MainView extends AppCompatActivity {
 
             loadReportsFromFirestore();
         }
-
+        NotificationHelper notificationHelper = new NotificationHelper(MainView.this);
+        notificationHelper.showNotification("New report added", "A new report has been added to the database.");
         View optionsButton = findViewById(R.id.optionsButton);
         optionsButton.setOnClickListener(new View.OnClickListener() {
             @Override
