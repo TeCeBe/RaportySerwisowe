@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/reportTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Title"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/reportContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Content"
+        app:layout_constraintTop_toBottomOf="@id/reportTitle"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="Data"
+        app:layout_constraintTop_toBottomOf="@id/reportContent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/reportDate"/>
+    <TextView android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="Status"
+        app:layout_constraintTop_toBottomOf="@id/reportDate"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/reportStatus"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
